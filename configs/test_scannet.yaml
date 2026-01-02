@@ -1,0 +1,9 @@
+dataset: 'ScanNet'
+checkpoint: ./weights/indoor.pth
+data_path: /mnt/nas_7/datasets/ScanNet/
+pairs_path: data/scannet_test_pairs_with_gt.txt
+seed: 18027
+threshold: 0.5
+if_outdoor: False
+merge_new: False
+if_local: False

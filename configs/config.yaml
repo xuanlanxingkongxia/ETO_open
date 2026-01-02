@@ -1,0 +1,202 @@
+log_dir: log
+save_dir: save
+master_port: 8381
+mode: train
+checkpoint: 
+# 15. 13在scannet上refine第一步，三张卡, lr:1e-4
+# checkpoint: /home/nijunjie/FDesp_new/save/2022_09_28_12_09_21/cp_27.pth
+# 14. 重新从头训练,第二步, 四张卡
+# checkpoint: /home/nijunjie/FDesp_new/save/2022_09_04_04_15_47/cp_9.pth
+# 13. 重新从头训练,第一步
+# checkpoint: /home/nijunjie/FDesp_new/save/2022_09_01_16_40_44/cp_17.pth
+# 12.按照1e-5的lr在32层梯度累积的基础上训练1600为最大维度的情况,在10的基础上，并且又解决了一个小bug
+# checkpoint: /home/nijunjie/FDesp_new/save/2022_08_18_18_53_50/cp_41.pth
+# 基于9，完整数据集，1024 maxsize，
+# checkpoint: /home/nijunjie/FDesp_new/save/2022_04_07_00_02_39/cp_1.pth
+# 11.利用完整数据集训练9.的结果
+# checkpoint: /home/nijunjie/FDesp_new/save/2022_04_02_17_51_28/cp_0.pth
+# 10.按照3e-5的lr在32层梯度累积的基础上训练1600为最大维度的情况
+# checkpoint: /home/nijunjie/FDesp_new/save/2022_03_28_01_27_50/cp_8.pth
+# 9.完全解了代码bug以后
+# checkpoint: /home/nijunjie/FDesp_new/save/2022_03_23_05_09_12/cp_69.pth
+# 8.一方面解了代码bug（但没有解数据bug），另一方面尝试把层数加到19层
+# checkpoint: /home/nijunjie/FDesp_new/save/2022_03_17_08_52_30/cp_68.pth
+# 7.加上分段loss以后的结果，其他和6一样，56+4,10像素精度又上升了3.8%左右
+# checkpoint: /home/nijunjie/FDesp_new/save/2022_02_10_20_10_39/cp_3.pth
+# 6. 在5的cp_19的基础上又多跑了13个epoch 3e-5，4个epoch 3e-6,10像素精度上升1.7%左右
+# checkpoint: /home/nijunjie/FDesp_new/save/2022_02_07_17_29_13/cp_3.pth
+# 5 其他参数都和4一样，主要的差别是lr 3e-5，warm up参数3， 去掉了epipolar loss,然后跑了40个epoch之后再跑4个lr除以10的epoch 
+# checkpoint: /home/nijunjie/FDesp_new/save/2022_02_03_15_16_14/cp_23.pth
+# 这里的主要参数分别是有前置归一化，negtive 100, nomatching 5, epipolar 1/1024, 有局部加强，whole 5，core 0.01，有dropout，前18后12，warmup参数是10，seed 6666 
+# checkpoint: /home/nijunjie/FDesp_new/save/2022_01_29_02_19_32/cp_11.pth
+# 4. 
+# checkpoint: /home/nijunjie/FDesp_new/save/2022_01_25_23_12_28/cp_31.pth
+# 3 参数设置是，negtiveweight 100, nomatching 5，epipolar 1/1024, epipolar有局部加强， seed 6666
+# wc loss有归一化， lr 1e-4, warmup 10 epoch， batchsize 32, dataset 0.05， 无dropou， 这个42是在30衰减之后的第13个epoch
+# checkpoint: /home/nijunjie/FDesp_new/save/2022_01_23_03_40_16/cp_42.pth
+# 2
+# checkpoint: /home/nijunjie/FDesp_new/cp_54.pth
+# 1
+#checkpoint: /home/nijunjie/FDesp_new/cp_23.pth
+
+# 第二步的初步计算，标签阈值设定为24
+# checkpoint2: /home/nijunjie/FDesp_new/save/2021_10_30_00_43_16/cp_16.pth
+# 第二步的初步筛选，标签阈值设定为36，筛选阈值是5, 比例是0.9
+# checkpoint2: /home/nijunjie/FDesp_new/save/2021_10_30_14_59_50/cp_1.pth
+# 第二步的再次计算，两个标签阈值都设定为48，threthold改为1e-3
+#checkpoint2: /home/nijunjie/FDesp_new/save/2021_10_30_21_36_30/cp_0.pth
+# 第二步的再次筛选，两个标签阈值都设定为48，筛选阈值是2,比例是0.6
+# checkpoint2: /home/nijunjie/FDesp_new/save/2021_10_30_22_35_33/cp_22.pth
+# 第二步的第三次计算，两个标签阈值都设定为48
+# checkpoint2: /home/nijunjie/FDesp_new/save/2021_10_31_20_02_29/cp_6.pth
+# 第二步的第三次筛选，两个标签阈值都设定为48
+# checkpoint2: /home/nijunjie/FDesp_new/save/2021_11_01_01_02_17/cp_21.pth
+# 在没有进行平衡的情况下跑出来的结果
+# checkpoint2: /home/nijunjie/FDesp_new/save/2021_11_04_15_49_37/cp_0.pth
+# 新的程序
+# checkpoint2: /home/nijunjie/FDesp_new/save/2021_11_28_23_13_51/cp_54.pth
+# checkpoint2: /home/nijunjie/FDesp_new/save/2021_12_05_23_17_42/cp_53.pth
+# 可复现测试误差2.3-2.4，策略是1e-5的lr，60个5%级别的epoch，然后进入1e-6的lr做refine
+# checkpoint2: /home/nijunjie/FDesp_new/save/2021_12_24_15_32_47/cp_46.pth
+# eval结果
+# checkpoint2: /home/nijunjie/FDesp_new/save/2021_12_28_02_52_59/cp_48.pth
+# 第二次训练与eval结果
+# checkpoint2: /home/nijunjie/FDesp_new/save/2021_12_28_23_15_35/cp_42.pth
+# checkpoint2: /home/nijunjie/FDesp_new/save/2022_01_07_10_01_31/cp_6.pth
+# 和cp_54.pth匹配，是现在最好的结果
+# checkpoint2: /home/nijunjie/FDesp_new/save/2022_01_17_11_38_12/cp_28.pth
+# lr 0.00002,17 epoch
+# checkpoint2: /home/nijunjie/FDesp_new/save/2022_02_04_18_40_39/cp_13.pth
+# 对应6的first，只利用中间4×4的信息，实际上跑了57+18个epoch
+# checkpoint2: /home/nijunjie/FDesp_new/save/2022_02_05_20_54_01/cp_57.pth
+# 对应6的first，利用中间10×10的信息,中位数角度误差看起来比上一个要低0.5度左右
+# checkpoint2: /home/nijunjie/FDesp_new/save/2022_02_08_01_37_42/cp_79.pth
+
+# 跑了一礼拜的结果（不过训练的时候没有改正除scale的bug）
+# checkpoint2: /home/nijunjie/FDesp_new/save/2022_03_14_00_07_32/cp_125.pth
+# checkpoint3: /home/nijunjie/FDesp_new/save/2022_03_14_00_07_32/cp_125_refine.pth
+
+# 264维， 9层gnn
+# checkpoint2: /home/nijunjie/FDesp_new/save/2022_03_27_05_45_05/cp_10.pth
+# checkpoint3: /home/nijunjie/FDesp_new/save/2022_03_27_05_45_05/cp_10_refine.pth
+
+# 稀疏解的一个阶段性成果，用的第一层是10号
+# checkpoint2: /home/nijunjie/FDesp_new/save/2022_05_23_02_20_05/cp_11.pth
+# checkpoint3: /home/nijunjie/FDesp_new/save/2022_05_23_02_20_05/cp_11_refine.pth
+
+# 计算光流的过程,3.1
+# 不限制whole_cost的结果
+# checkpoint2: /home/nijunjie/FDesp_new/save/2022_07_14_05_16_52/cp_9.pth
+# 限制whole_cost 0.5
+# checkpoint2: /home/nijunjie/FDesp_new/save/2022_07_15_05_41_35/cp_28.pth
+# 限制whole_cost 5.0
+# checkpoint2: /home/nijunjie/FDesp_new/save/2022_07_15_06_20_19/cp_30.pth
+# 限制whole_cost 5.0，second基数为16（上面两个基数都是256）
+# checkpoint2: /home/nijunjie/FDesp_new/save/2022_07_16_21_45_32/cp_65.pth
+
+# 第三层refine以后的结果，联合训练，以下都用的是256基数whole cost阈值5.0的版本refine，并且都排除掉了不带dense gt的第二层数据
+# checkpoint2: /home/nijunjie/FDesp_new/save/2022_07_21_02_22_38/cp_9.pth
+# checkpoint3: /home/nijunjie/FDesp_new/save/2022_07_21_02_22_38/cp_9_refine.pth
+# 第三层refine以后的结果，不联合训练，但是第三层重新跑resnet2
+# checkpoint2: /home/nijunjie/FDesp_new/save/2022_07_23_02_01_47/cp_9.pth
+# checkpoint3: /home/nijunjie/FDesp_new/save/2022_07_23_02_01_47/cp_9_refine.pth
+# 第三层refine以后的结果，联合训练,第三层重新resnet2，加上position encoding和position loss
+# checkpoint2: /home/nijunjie/FDesp_new/save/2022_07_26_02_59_28/cp_39.pth
+# checkpoint3: /home/nijunjie/FDesp_new/save/2022_07_26_02_59_28/cp_39_refine.pth
+# 取消reverse第二层的exist，nomatching以及第三层的whole cost，0.1倍second的设定
+# checkpoint2: /home/nijunjie/FDesp_new/save/2022_08_01_10_10_29/cp_40.pth
+# checkpoint3: /home/nijunjie/FDesp_new/save/2022_08_01_10_10_29/cp_40_refine.pth
+# 进一步取消必须第二层有gt才训练第三层的设定
+# checkpoint2: /home/nijunjie/FDesp_new/save/2022_08_06_00_34_34/cp_54.pth
+# checkpoint3: /home/nijunjie/FDesp_new/save/2022_08_06_00_34_34/cp_54_refine.pth
+# 加上了第三层nomatching loss
+# checkpoint2: /home/nijunjie/FDesp_new/save/2022_08_15_02_58_11/cp_10.pth
+# checkpoint3: /home/nijunjie/FDesp_new/save/2022_08_15_02_58_11/cp_10_refine.pth
+# checkpoint2: /home/nijunjie/FDesp_new/save/2022_08_16_23_16_56/cp_6.pth
+# checkpoint3: /home/nijunjie/FDesp_new/save/2022_08_16_23_16_56/cp_6_refine.pth
+# 12的基础上做了lr为1e-6的refine训练，position_loss的范围是2
+# checkpoint2: /home/nijunjie/FDesp_new/save/2022_08_23_22_45_50/cp_11.pth
+# checkpoint3: /home/nijunjie/FDesp_new/save/2022_08_23_22_45_50/cp_11_refine.pth
+# checkpoint3:
+# 基于14的重新训练，第三步，四张卡，界限是10，lr是0.00015, batchsize是10，每个batch内部12个小patch，阈值是5.0
+# checkpoint2: /home/nijunjie/FDesp_new/save/2022_09_18_21_08_56/cp_17.pth
+# 基于14的重新训练，第四步，两张卡，界限0，lr是0.00001
+# checkpoint2: /home/nijunjie/FDesp_new/save/2022_09_20_15_14_43/cp_11.pth
+# 基于14的重新训练，第五步，三张卡，界限0，lr是0.0001
+# checkpoint3: /home/nijunjie/FDesp_new/save/2022_09_24_13_31_45/cp_24_refine.pth
+# 基于14的重新训练，第五步，三张卡，界限0，lr是0.0001, 按照scannet的设置重新跑的室外实验
+# checkpoint3: /home/nijunjie/FDesp_new/save/2022_10_14_09_33_23/cp_3_refine.pth
+
+# 把scale上限从256调整到1的ablation study:基于14的重新训练，第五步，三张卡，界限0，lr是0.00001 
+# checkpoint3: /home/nijunjie/FDesp_new/save/2022_10_14_15_22_41/cp_24_refine.pth
+# 把回归过程独立出来的ablation study:基于14的重新训练，第五步，三张卡，界限0，lr是0.00001 
+# checkpoint3: /home/nijunjie/FDesp_new/save/2022_10_16_20_42_43/cp_12_refine.pth
+# 去掉whole loss的ablation study:基于14的重新训练，第五步，三张卡，界限0，lr是0.00001 
+# checkpoint3: /home/nijunjie/FDesp_new/save/2022_10_21_11_47_57/cp_24_refine.pth
+# 去掉whole loss的第二层ablation
+# checkpoint2: /home/nijunjie/FDesp_new/save/2022_10_28_22_02_11/cp_24.pth
+# 把position_loss和classifying loss挂在一起的第二层ablation
+# checkpoint2: /home/nijunjie/FDesp_new/save/2022_10_30_09_26_13/cp_24.pth
+# 去掉classifying_loss的第二层ablation
+# checkpoint2: /home/nijunjie/FDesp_new/save/2022_11_01_12_14_02/cp_13.pth
+# 把scale上限从256调整到1的第二层ablation
+# checkpoint2: /home/nijunjie/FDesp_new/save/2022_11_04_10_09_59/cp_9.pth
+# 不用OT输出，而是用softmax的第二层ablation
+# checkpoint2: /home/nijunjie/FDesp_new/save/2022_11_05_08_41_33/cp_24.pth
+# 去掉classifying loss 的第二层ablation
+# checkpoint2: /home/nijunjie/FDesp_new/save/2022_11_08_06_58_12/cp_24.pth
+
+
+
+# 基于15在scannet上的在室外版本上refine的结果，第二步，三张卡，界限0，lr是0.0001
+# checkpoint2: /home/nijunjie/FDesp_new/save/2022_10_05_00_12_29/cp_24.pth
+# lr 1e-5
+# checkpoint3: /home/nijunjie/FDesp_new/save/2022_10_08_17_07_37/cp_3_refine.pth
+# lr 1e-5, our best indoor
+# checkpoint3: /home/nijunjie/FDesp_new/save/2022_10_09_18_24_07/cp_19_refine.pth
+
+#带一点bug的2倍基础版本
+checkpoint: /home/nijunjie/PATS/save/2023_10_05_16_51_11/cp_56.pth
+# checkpoint: /home/nijunjie/PATS/save/2023_10_21_12_28_55/cp_2.pth
+# checkpoint: ./save/2023_10_19_15_26_50/cp_9.pth
+# checkpoint: ./save/2023_10_20_02_08_05/cp_4.pth
+# checkpoint2: ./save/outdoor_fine.pth
+# checkpoint3: ./save/outdoor_third.pth
+# checkpoint: ./save/cp_6.pth
+
+batch_size: 16
+lr: 0.0000003
+backbone_lr: 0.0003
+seed: 400006
+weight_decay: 0.01
+num_epoch: 70
+num_workers: 16
+milestones:
+  - 10
+  - 20
+gamma: 0.1
+weight1: 1.0
+weight2: 0.0
+loss_type: epipolar
+# origin_data_path: /mnt/nas_7/datasets/yeweicai/MegaDepth/phoenix/S6/zl548/MegaDepth_v1/
+# origin_data_path: /mnt/nas_8/group/nijunjie/megadepth/
+origin_data_path: /home/nijunjie/FAST/megadepth/
+# origin_data_path: /mnt/nas_7/datasets/nijunjie_changed_megadepth/
+label_path: /mnt/nas_7/datasets/yeweicai/MegaDepth/phoenix/S6/zl548/MegaDepth_v1/
+label_reverse_path: /mnt/nas_7/datasets/nijunjie_changed_megadepth/easier_megadepth/megadepth_accuracy_reverse_32/
+pairs_path: /mnt/nas_7/datasets/nijunjie_changed_megadepth/easier_megadepth/megadepth_parameters/
+Aachen_path: /mnt/nas_7/datasets/yeweicai/visuallocalization/Aachen/Aachen-Day-Night/
+Scannet_path: /mnt/nas_7/datasets/ScanNet/scans/
+yfcc_path: /mnt/nas_7/datasets/yfcc100M/
+Scannet_parameter_path: /mnt/nas_8/group/nijunjie/Scannet_parameters/
+
+# data_path: /mnt/nas_7/datasets/nijunjie_changed_coco2017/
+gpu_ids: [1, 2, 3]
+if_swap: False
+if_eval: False
+if_third: True
+if_superpoint: False
+if_feature: False
+# if_superglue: False
+# if_loftr: False
+# scale_factor: 1.0
